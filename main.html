@@ -1,16 +1,71 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .progress-bar {
+            width: 100%;
+            background-color: #ddd;
+        }
+
+        .circle {
+            width: 20px;
+            height: 20px;
+            background-color: #3498db;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .circle.active {
+            background-color: #2ecc71;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <div class="progress-bar" id="progress-bar">
+        <div class="circle active" id="circle-1"></div>
+        <div class="circle" id="circle-2"></div>
+        <div class="circle" id="circle-3"></div>
+        <div class="circle" id="circle-4"></div>
+        <div class="circle" id="circle-5"></div>
+    </div>
+    <button id="prev" disabled>Previous</button>
+    <button id="next">Next</button>
 
+    <script>
+        const circles = document.querySelectorAll('.circle');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+
+        let currentCircleIndex = 0;
+
+        function updateButtons() {
+            prevButton.disabled = currentCircleIndex === 0;
+            nextButton.disabled = currentCircleIndex === circles.length - 1;
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentCircleIndex > 0) {
+                circles[currentCircleIndex].classList.remove('active');
+                currentCircleIndex--;
+                updateButtons();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentCircleIndex < circles.length - 1) {
+                circles[currentCircleIndex].classList.add('active');
+                currentCircleIndex++;
+                updateButtons();
+            }
+        });
+    </script>
 </body>
-
 </html>
